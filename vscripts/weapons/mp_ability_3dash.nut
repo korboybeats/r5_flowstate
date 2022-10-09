@@ -40,7 +40,10 @@ bool function OnWeaponChargeBegin_ability_3dash( entity weapon )
 		player.p.last3dashtime = Time()
 		thread DashPlayer(player, chargeTime)
 		PlayerUsedOffhand( player, weapon )
+	#else
+	ScreenFlash( 25, 25, 25, 0, 0.1 )
 	#endif
+	PhaseShift( player, 0, chargeTime, eShiftStyle.Dash )
 	return true
 }
 
@@ -60,7 +63,7 @@ void function DashPlayer(entity player, float chargeTime)
 	player.SetOrigin(result.endPos)
 	if(PutEntityInSafeSpot( player, null, null, player.GetOrigin(), player.GetOrigin() ))
 	{
-		player.SetVelocity(player.GetVelocity() + 500 * yes)
+		player.SetVelocity(player.GetVelocity() + 3000 * yes)
 	}
 	else
 	{
